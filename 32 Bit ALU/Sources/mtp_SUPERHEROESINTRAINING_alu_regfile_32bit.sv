@@ -34,8 +34,13 @@ module regfile_32bit(ra1, ra2, wa, wd, we, clk, rd1, rd2);
     output logic [DWIDTH - 1:0] rd2;
     logic [DWIDTH-1:0] Mem[2**RWIDTH];
 
+
+    integer i;
+
     /*Set Memory to 0*/
-    /*Implement here if necessary */
+    initial begin
+        for (i=0; i<2**RWIDTH; i=i+1) Mem[i] <= 32'h00000000;
+    end
     
     always_ff @ (posedge clk) begin
         if (we) begin
