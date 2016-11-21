@@ -6,7 +6,7 @@
 // 
 // Create Date: 10/24/2016 05:17:25 PM
 // Design Name: 
-// Module Name: alu_128_tb
+// Module Name: alu_32_tb
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -21,7 +21,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module alu_128_tb;
+module alu_32_tb;
 
 parameter DWIDTH = 32;
 const real pi = 3.1416;
@@ -49,7 +49,7 @@ typedef enum bit[3:0] {
               } optype;
               
 optype mode_sel;
-alu_128bit L1 ( .op1(op1), 
+alu_32bit L1 ( .op1(op1), 
                 .op2(op2) , 
                 .opsel(mode_sel[2:0]),
                 .mode(mode_sel[3]),  

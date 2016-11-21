@@ -5,7 +5,7 @@
 // 
 // Create Date: 10/29/2016 12:35:28 PM
 // Design Name: 
-// Module Name: alu_128bit
+// Module Name: alu_32bit
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module alu_128bit( op1, op2, opsel, mode, result, c_flag, z_flag, o_flag, s_flag);
+module alu_32bit( op1, op2, opsel, mode, result, c_flag, z_flag, o_flag, s_flag);
 
     parameter DWIDTH = 32;
     
@@ -57,7 +57,7 @@ module alu_128bit( op1, op2, opsel, mode, result, c_flag, z_flag, o_flag, s_flag
     
     genvar i;
     generate
-        for (i=1; i<DWIDTH; i=i+1) begin: generate_128bitALU
+        for (i=1; i<DWIDTH; i=i+1) begin: generate_32bitALU
             alu_1bit ALUnext(
                 .op1(op1[i]),
                 .op2(op2[i]),
@@ -71,7 +71,7 @@ module alu_128bit( op1, op2, opsel, mode, result, c_flag, z_flag, o_flag, s_flag
         end
     endgenerate
     
-    FlagGen_128bit FG(
+    FlagGen_32bit FG(
         .opsel(opsel),
         .mode(mode),
         .cin(toALUnext[DWIDTH]),

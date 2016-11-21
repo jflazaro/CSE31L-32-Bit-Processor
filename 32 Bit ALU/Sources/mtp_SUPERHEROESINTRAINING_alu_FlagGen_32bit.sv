@@ -21,7 +21,7 @@
 
 parameter DWIDTH = 32;
 
-module FlagGen_128bit(
+module FlagGen_32bit(
     input logic [2:0] opsel,
     input logic mode,
     input logic cin,

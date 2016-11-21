@@ -5,7 +5,7 @@
 // 
 // Create Date: 10/30/2016 06:24:22 PM
 // Design Name: 
-// Module Name: FlagGen_128bit_tb
+// Module Name: FlagGen_32bit_tb
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module FlagGen_128bit_tb;
+module FlagGen_32bit_tb;
 logic [2:0] opsel;
 logic mode;
 logic cin;
@@ -30,7 +30,7 @@ logic z_flag;
 logic s_flag;
 logic o_flag;
 
-FlagGen_128bit FG1(
+FlagGen_32bit FG1(
     .opsel(opsel),
     .mode(mode),
     .cin(cin),
