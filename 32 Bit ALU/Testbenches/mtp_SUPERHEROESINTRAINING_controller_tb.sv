@@ -20,10 +20,32 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module mtp_SUPERHEROESINTRAINING_controller_tb;
+module controller_tb;
 
     logic [31:0]a;
+    logic ri;
+    logic [5:0]rs;
+    logic [5:0]rd;
+    logic [3:0]fx;
+    logic [5:0]rt;
+    logic [14:0]imm;
+
+    controller C1(
+        .in32(a),
+        .ri(ri),
+        .rs(rs),
+        .rd(rd),
+        .fx(fx),
+        .rt(rt),
+        .imm(imm)
+        );
     
+initial begin
+    #50;
+    a = 32'b10111101010101000111111000000000; /*rt and imm should be 0, rt is set to 6'b000000*/
+    #50;
+    a = 32'b01111010101010000111111000000000; /*we should see 111111 for rt and imm should be 0*/
+    end    
     
     
 endmodule

@@ -21,16 +21,16 @@
 
 parameter WIDTH = 32;
 module controller(
-    input [WIDTH-1:0]in32,
-    output RI,
-    output rs,
-    output rd,
-    output fx,
-    output rt,
-    output imm
+    input logic [WIDTH-1:0]in32,
+    output logic ri,
+    output logic [5:0]rs,
+    output logic [5:0]rd,
+    output logic [3:0]fx,
+    output logic [5:0]rt,
+    output logic [14:0]imm
     );
 
-    assign RI = in32[WIDTH];
+    assign ri = in32[WIDTH-1];
     assign rs = in32[30:25];
     assign rd = in32[24:19];
     assign fx = in32[18:15];
