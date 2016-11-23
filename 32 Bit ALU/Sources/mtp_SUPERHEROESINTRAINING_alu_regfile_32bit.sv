@@ -19,7 +19,7 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module regfile_32bit(ra1, ra2, wa, wd, we, clk, rd1, rd2);
+module regfile_32bit(ra1, ra2, wa, wd, we, clk, rd1, rd2, rst);
 
     parameter RWIDTH = 6;
     parameter DWIDTH = 32;
@@ -30,22 +30,35 @@ module regfile_32bit(ra1, ra2, wa, wd, we, clk, rd1, rd2);
     input logic [DWIDTH - 1:0]  wd;
     input logic                 we;
     input logic                 clk;
+    input logic                 rst;
     output logic [DWIDTH - 1:0] rd1;
     output logic [DWIDTH - 1:0] rd2;
     logic [DWIDTH-1:0] Mem[2**RWIDTH];
 
-
-    integer i;
-
-    /*Set Memory to 0*/
+    /*Set ALL Memory to 0 - doesn't work for some reason
     initial begin
-        for (i=0; i<2**RWIDTH; i=i+1) Mem[i] <= 32'h00000000;
+        if (rst) begin
+            for (i=0; i<2**RWIDTH; i=i+1) begin 
+                Mem[i] <= 32'h00000000;
+            end
+            rst <= 0;
+        end
+    end
+    */
+    always_ff @ (rst) begin
+        automatic integer i = 0;
+        for (i=0; i<2**RWIDTH; i=i+1) begin 
+        Mem[i] <= 32'h00000000;
+        end    
     end
     
     always_ff @ (posedge clk) begin
         if (we) begin
             /*Write mode*/
-            Mem[wa] <= wd;
+            if (wa) begin
+                /*Writable only on non-zero register*/
+                Mem[wa] <= wd;
+            end
         end
         else begin
             /*read mode*/
