@@ -22,7 +22,6 @@
 
 module IB32bit_Adder_tb;
 parameter AWIDTH = 6;
-parameter RWIDTH = 32;
 logic [AWIDTH-1:0] addr;
 logic [AWIDTH-1:0] toPCaddr;
 IB32bit_Adder Adder1(
@@ -38,11 +37,15 @@ initial begin
         addr=addr+1;
         #10;
     end*/
-    addr = 6'b111110;
+    /*addr = 6'b111110;
     #10;
     addr = addr + 1;
     #10;
     addr = addr + 1;
-    #10;
+    #10;*/
+    for (i=0; i<32; i++) begin
+        addr = i;
+        #10;
+    end
 end
 endmodule

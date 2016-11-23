@@ -19,15 +19,32 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
-module IB32bit_PC(addr, clk, addr_out);
+/*module IB32bit_PC(addr, clk, addr_out);
     parameter AWIDTH = 6;
     
     input logic [AWIDTH-1:0] addr;
     input logic clk;
-    output logic [AWIDTH-1:0] addr_out=0;
+    output logic [AWIDTH-1:0] addr_out;
+    
     
     always_ff@(posedge clk) begin
         addr_out <= addr;
+    end
+endmodule*/
+
+module IB32bit_PC(addr, clk, addr_out, rst);
+    parameter AWIDTH = 6;
+    
+    input addr;
+    input clk;
+    input rst;
+    output logic [AWIDTH-1:0] addr_out;
+    
+    always_ff@(posedge clk) begin
+        if (rst==1) begin
+            addr_out <= 5;
+        end
+        else
+            addr_out <= addr;
     end
 endmodule
