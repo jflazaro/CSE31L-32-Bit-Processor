@@ -39,9 +39,9 @@ module regfile_32bit(ra1, ra2, wa, wd, we, clk, rd1, rd2);
     integer i;
     
     initial begin
-            for (i=0; i<2**RWIDTH; i=i+1) begin 
-                Mem[i] <= 32'h00000000;
-            end
+        for (i=0; i<2**RWIDTH; i=i+1) begin 
+            Mem[i] <= 32'h00000000;
+        end
     end
     
     always_ff @ (posedge clk) begin
