@@ -35,14 +35,14 @@ endmodule*/
 module IB32bit_PC(addr, clk, addr_out, rst);
     parameter AWIDTH = 6;
     
-    input addr;
+    input logic [AWIDTH-1:0] addr;
     input clk;
     input rst;
     output logic [AWIDTH-1:0] addr_out;
     
     always_ff@(posedge clk) begin
         if (rst==1) begin
-            addr_out <= 5;
+            addr_out <= 0;
         end
         else
             addr_out <= addr;
