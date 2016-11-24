@@ -3,9 +3,9 @@
 // Company: 
 // Engineer: 
 // 
-// Create Date: 11/20/2016 05:55:48 PM
+// Create Date: 11/22/2016 10:02:29 PM
 // Design Name: 
-// Module Name: IB32bit_PC
+// Module Name: Instruction_Memory_32bit_tb
 // Project Name: 
 // Target Devices: 
 // Tool Versions: 
@@ -19,19 +19,24 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module IB32bit_PC(addr, clk, addr_out, rst);
-    parameter AWIDTH = 6;
-    
-    input logic [AWIDTH-1:0] addr;
-    input clk;
-    input rst;
-    output logic [AWIDTH-1:0] addr_out;
-    
-    always_ff@(posedge clk) begin
-        if (rst==1) begin
-            addr_out <= 0;
-        end
-        else
-            addr_out <= addr;
+
+module Instruction_Memory_32bit_tb;
+parameter AWIDTH = 6;
+parameter RWIDTH = 32;
+
+logic [AWIDTH-1:0] addr;
+logic [RWIDTH-1:0] read_data;
+
+Instruction_Memory_32bit IM1(
+    .addr(addr),
+    .read_data(read_data)
+    );
+
+int i;
+initial begin
+    for (i=0;i<(2**AWIDTH);i++) begin
+        addr=i;
+        #20;
     end
+end
 endmodule

@@ -19,11 +19,11 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////////
-// THIS WILL BE USED TO TEST INSTRUCTION BLOCK BEFORE INSTRUCTION MEMORY IS REACHED
-/////////////////////////////////////////////////////////////////////////////////// 
+//////////////////////////////////////////////////////////////////////////////////////////
+// INSTRUCTION BLOCK IS ADDER + PC CONNECTED TOGETHER BEFORE INSTRUCTION MEMORY IS REACHED
+////////////////////////////////////////////////////////////////////////////////////////// 
 
-module Instruction_Block_32bit(addr, clk, inc, rst);//addr, read_data, clk, inc, Mem);
+module Instruction_Block_32bit(addr, clk, inc, rst);
     parameter AWIDTH = 6;
     parameter RWIDTH = 32;
     
@@ -31,10 +31,7 @@ module Instruction_Block_32bit(addr, clk, inc, rst);//addr, read_data, clk, inc,
     input logic [AWIDTH-1:0] inc;
     input logic clk;
     input logic rst;
-    
-    logic [RWIDTH-1:0] Mem[2**AWIDTH];
-    
-    //wire [AWIDTH-1:0] fromPCaddr;
+
     wire [AWIDTH-1:0] toPCaddr;
     
     IB32bit_Adder Adder1(
@@ -49,14 +46,4 @@ module Instruction_Block_32bit(addr, clk, inc, rst);//addr, read_data, clk, inc,
         .addr_out(addr),
         .rst(rst)
         );
-    
-    //assign addr = fromPCaddr;
-    //assign read_data = Mem[addr];
-    /*always_ff@(posedge clk) begin
-        addr <= fromPCaddr;
-        //read_data <= Mem[addr];
-    end */
-    /*always_comb begin
-        addr = fromPCaddr;
-    end*/
 endmodule
