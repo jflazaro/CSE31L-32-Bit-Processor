@@ -22,15 +22,15 @@
 
 module Instruction_Block_32bit_tb;
 parameter AWIDTH = 6;
-//parameter RWIDTH = 32;
+parameter RWIDTH = 32;
 
-logic [AWIDTH-1:0] addr;
+logic [RWIDTH-1:0] read_data;
 logic [AWIDTH-1:0] inc = 1;
 logic clk = 0;
 logic rst = 1;
 
 Instruction_Block_32bit IB1(
-    .addr(addr),
+    .read_data(read_data),
     .inc(inc),
     .clk(clk),
     .rst(rst)
