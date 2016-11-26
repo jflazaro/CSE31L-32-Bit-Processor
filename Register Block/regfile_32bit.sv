@@ -33,30 +33,28 @@ module regfile_32bit(ra1, ra2, wa, wd, we, clk, rd1, rd2);
     output logic [DWIDTH - 1:0] rd1;
     output logic [DWIDTH - 1:0] rd2;
     logic [DWIDTH-1:0] Mem[(2**RWIDTH)-1:0];
-    
+/*    
     genvar i;
-    /*Generate statement - set all memory to 0*/
     generate
-        for (i=0; i<2**RWIDTH; i=i+1) begin: clear_mem
-            assign Mem[i] = 32'h00000000;
-        end
+    for (i=0; i<(2**RWIDTH)-1; i=i+1) begin: clear_mem
+         assign Mem[i] = 32'h00000000;
+    end
     endgenerate
-    
+*/
     always_ff @ (posedge clk) begin
-        if (we) begin
-            /*Write mode*/
-            if (wa) begin
+       if ((we) && (wa)) begin
                 /*Writable only on non-zero register*/
                 Mem[wa] <= wd;
-            end
-        end
+       rd1 <= Mem[ra1];
+       rd2 <= Mem[ra2];
+       end
     end
     
-    always_comb begin
-        /*read mode, not confined to clk*/
-        rd1 <= Mem[ra1];
-        rd2 <= Mem[ra2];
-    end
+//    always_comb begin
+//        /*read mode, not confined to clk*/
+//        rd1 <= Mem[ra1];
+//        rd2 <= Mem[ra2];
+//    end
             
     
 endmodule

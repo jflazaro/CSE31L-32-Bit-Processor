@@ -33,7 +33,7 @@ module regfile_32bit_tb; // Testbenches don't need any ports.
     logic                 clk = 0;
     logic [DWIDTH - 1:0] rd1;
     logic [DWIDTH - 1:0] rd2;
-    /*logic [DWIDTH-1:0] Mem[(2**RWIDTH)-1:0];*/
+//    logic [DWIDTH-1:0] Mem[(2**RWIDTH)-1:0];
             
     regfile_32bit R1(
         .ra1(ra1),
@@ -44,7 +44,7 @@ module regfile_32bit_tb; // Testbenches don't need any ports.
         .clk(clk),
         .rd1(rd1),
         .rd2(rd2)
-        //.Mem(Mem) /*DO i need to hook up memory? */
+//        .Mem(Mem) /*DO i need to hook up memory? */
         );
     
     initial begin
