@@ -45,16 +45,14 @@ module regfile_32bit(ra1, ra2, wa, wd, we, clk, rd1, rd2);
        if ((we) && (wa)) begin
                 /*Writable only on non-zero register*/
                 Mem[wa] <= wd;
-       rd1 <= Mem[ra1];
-       rd2 <= Mem[ra2];
        end
     end
     
-//    always_comb begin
-//        /*read mode, not confined to clk*/
-//        rd1 <= Mem[ra1];
-//        rd2 <= Mem[ra2];
-//    end
+    always_comb begin
+        /*read mode, not confined to clk*/
+        rd1 <= Mem[ra1];
+        rd2 <= Mem[ra2];
+    end
             
     
 endmodule
