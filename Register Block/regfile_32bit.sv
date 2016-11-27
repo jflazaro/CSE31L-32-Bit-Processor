@@ -41,6 +41,10 @@ module regfile_32bit(ra1, ra2, wa, wd, we, clk, rd1, rd2);
     end
     endgenerate
 */
+    // Hardcode zero for Register 0.
+    //Needs to be fixed
+    //assign Mem[0] = 32'h00000000;
+
     always_ff @ (posedge clk) begin
        if ((we) && (wa)) begin
                 /*Writable only on non-zero register*/

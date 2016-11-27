@@ -30,11 +30,13 @@ module RegBlock_tb; // Testbenches don't need any ports.
     logic [DWIDTH -1:0]   wd;
     logic                 we;
     logic                 clk = 0;
-    logic                 mux_sel; //Need to be defined in the controller
+    logic                 muxsel1; //Need to be defined in the controller
     logic [IMM_IN -1:0]   imm_in;
-    logic [DWIDTH -1:0]  opA;
-    logic [DWIDTH -1:0]  opB;
-    logic [DWIDTH -1:0]  opBwd;    
+//    logic [DWIDTH -1:0]  opA;
+//    logic [DWIDTH -1:0]  opB;
+    logic [DWIDTH -1:0]  opBwd;
+    logic [3:0]         ALUopsel;
+    logic [DWIDTH -1:0] ALUresult;    
             
     RegBlock RB1(
         .rs(rs),
@@ -43,32 +45,34 @@ module RegBlock_tb; // Testbenches don't need any ports.
         .wd(wd),
         .we(we),
         .clk(clk),
-        .mux_sel(mux_sel),
+        .muxsel1(muxsel1),
         .imm_in(imm_in),
-        .opA(opA),
-        .opB(opB),
-        .opBwd(opBwd)
+//        .opA(opA),
+//        .opB(opB),
+        .opBwd(opBwd),
+        .ALUopsel(ALUopsel),
+        .ALUresult(ALUresult)
     );
        
-    initial begin
+initial begin
     
     imm_in = 15'b001111111111111;
-    mux_sel = 1'b0;         
+    muxsel1 = 1'b0;         
       
     we = 1'b0;
     rd = 6'b000000;
     wd = 32'h000000;
     rs = 6'b000000;
     rt = 6'b101001;
-    mux_sel = 1;
+    muxsel1 = 1;
     #50;
-    mux_sel = 0;
+    muxsel1 = 0;
     
     #50;
     rs = 6'b100011;
-    mux_sel = 1;
+    muxsel1 = 1;
     #50;
-    mux_sel = 0;
+    muxsel1 = 0;
     #50;
     
     we = 1'b1;
@@ -77,31 +81,31 @@ module RegBlock_tb; // Testbenches don't need any ports.
     rs = 6'b000000;
     rt = 6'b000000;
     
-    mux_sel = 1;
-    #50;
-    mux_sel = 0;
+//    mux_sel = 1;
+//    #50;
+//    mux_sel = 0;
     
-    #50;
+//    #50;
     
-    we = 1'b1;
-    rd = 6'b001100;
-    wd = 32'hAAAAAAAA;
-    rs = 6'b001011;
-    rt = 6'b111111;
+//    we = 1'b1;
+//    rd = 6'b001100;
+//    wd = 32'hAAAAAAAA;
+//    rs = 6'b001011;
+//    rt = 6'b111111;
     
-    mux_sel = 1;
-    #50;
-    mux_sel = 0;
+//    mux_sel = 1;
+//    #50;
+//    mux_sel = 0;
     
-    #50;        
-    we = 1'b0;
-    rs = 6'b001100;
-    rt= 6'b111111;
-    rd = 6'b000000;
-    wd = 32'h00000000;
+//    #50;        
+//    we = 1'b0;
+//    rs = 6'b001100;
+//    rt= 6'b111111;
+//    rd = 6'b000000;
+//    wd = 32'h00000000;
     
-    #50;
-    mux_sel = 1;
+//    #50;
+//    mux_sel = 1;
     
 //    #50;
 //    ra1 = 6'b000000;
