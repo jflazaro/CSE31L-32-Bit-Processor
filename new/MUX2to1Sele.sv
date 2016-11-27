@@ -20,7 +20,17 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module MUX2to1Sele(
+module MUX2to1Sele(MS2, ReaDat, Addr, WD );
 
-    );
+parameter AWIDTH = 32;
+
+input logic MS2;
+input logic [AWIDTH - 1:0] ReaDat;
+input logic [AWIDTH - 1:0] Addr;
+output logic WD;
+
+assign WD = (MS2 == 1'b1)? ReaDat:
+            (MS2 == 1'b0)? Addr:
+            1'bz; 
+
 endmodule
