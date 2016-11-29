@@ -19,7 +19,8 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-
+//Hardcode index 0 to 32'b0
+//Make it so that you cannot write into index 0.
 module Datmem (ReaDat, WE2, Addr, WriDat);
 
 parameter AWIDTH = 32;
@@ -32,9 +33,17 @@ input logic [AWIDTH - 1:0] WriDat;
 
 logic [AWIDTH - 1:0] MEM [ALENGTH -1: 0];
 
+/*genvar i;
+generate
+    for (i=0;i<ALENGTH;i++) begin: gen_dm
+        assign MEM[0] = 0;
+    end
+endgenerate*/
 
-always begin
-    if (WE2) begin
+assign MEM[0] = 0;
+
+always_comb begin
+    if (WE2 && Addr) begin
         MEM[Addr] <= WriDat;
         ReaDat <= MEM[Addr];
         end else ReaDat <= MEM[Addr];
