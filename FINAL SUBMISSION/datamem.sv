@@ -47,5 +47,5 @@ always_comb begin
         MEM[Addr] <= WriDat;
         ReaDat <= MEM[Addr];
         end else ReaDat <= MEM[Addr];
-    end 
+end 
 endmodule

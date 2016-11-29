@@ -33,14 +33,14 @@ module regfile_32bit(ra1, ra2, wa, wd, we, clk, rd1, rd2);
     output logic [DWIDTH - 1:0] rd1;
     output logic [DWIDTH - 1:0] rd2;
     logic [DWIDTH-1:0] Mem[(2**RWIDTH)-1:0];
-/*    
-    genvar i;
+    
+/*    genvar i;
     generate
     for (i=0; i<(2**RWIDTH)-1; i=i+1) begin: clear_mem
          assign Mem[i] = 32'h00000000;
     end
-    endgenerate
-*/
+    endgenerate*/
+
     // Hardcode zero for Register 0.
     //Needs to be fixed
     assign Mem[0] = 32'h00000000;
