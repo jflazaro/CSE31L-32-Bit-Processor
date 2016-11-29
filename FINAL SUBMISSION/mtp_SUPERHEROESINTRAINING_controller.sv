@@ -18,32 +18,33 @@
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
-parameter D = 32;
+
+parameter DWIDTH = 32;
 parameter RWIDTH = 6;
 parameter IMM_IN = 15;
 module controller(
-    input logic [D-1:0]in32,
+    input logic [DWIDTH-1:0]in32,
+    output logic ri,
     output logic [RWIDTH-1:0]rs,
     output logic [RWIDTH-1:0]rd,
+    output logic [3:0]fx,
     output logic [RWIDTH-1:0]rt,
     output logic [IMM_IN -1:0]imm,
 	
 	/*flags*/
 	output logic [3:0]ALUopsel,
-	output logic MUXsel1,
-	output logic MUXsel2,
-	output logic WE1, /*RegWrite*/
-	output logic WE2	 /*MemWrite*/
+	wire MUXsel1,
+	wire MUXsel2,
+	wire WE1, /*RegWrite*/
+	wire WE2	 /*MemWrite*/
     );
 
-    
-    
-    
-    
+    assign ri = in32[DWIDTH-1];
     assign rs = in32[30:25];
     assign rd = in32[24:19];
-    assign rt = (in32[D-1]) ? 6'b000000 : in32[14:9] ;
-    assign imm = (in32[D-1]) ? in32[14:0] : in32[8:0] ;    
+    assign fx = in32[18:15];
+    assign rt = (in32[DWIDTH-1]) ? 6'b000000 : in32[14:9] ;
+    assign imm = (in32[DWIDTH-1]) ? in32[14:0] : in32[8:0] ;    
 	
 	assign ALUopsel = (
 	                  (in32[18:15]==4'b1111) ?  4'b0010 : /*NOP*/
@@ -60,8 +61,8 @@ module controller(
 	                  4'b0010 ); /*default value, do nothing*/
 	                                    /*0010 is the ALU opcode for MOVE, which does nothing.*/
 	                                    /*This is apparent in NOP, MOV, LOAD, STORE */
-	assign MUXsel1 = in32[D-1] ? 1 : 0; /*if immediate mode, then MUXsel1 = 1 */
-    assign MUXsel2 = (in32[18:15]==4'b0100) ? 1 : /*if load or store function is called, muxsel2 = 1*/
+	assign MUXsel1 = in32[DWIDTH-1] ? 1 : 0; /*if immediate mode, then MUXsel1 = 1 */
+    assign MUXsel2 = (in32[18:15]==4'b0100) ? 1 :
                      (in32[18:15]==4'b0110) ? 1 :
                      0;
     assign WE1 = (in32[18:15]==4'b0100) ? 1: 0; /*load function*/
