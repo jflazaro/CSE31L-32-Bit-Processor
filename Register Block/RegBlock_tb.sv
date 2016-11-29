@@ -55,31 +55,68 @@ module RegBlock_tb; // Testbenches don't need any ports.
     );
        
 initial begin
-    
-    imm_in = 15'b001111111111111;
-    muxsel1 = 1'b0;         
-      
+
+
+    /*Initalize*/
+    ALUopsel = 4'b1111;
+    imm_in = 15'b111111111111111;
+    muxsel1 = 1'b0;
     we = 1'b0;
     rd = 6'b000000;
     wd = 32'h000000;
     rs = 6'b000000;
-    rt = 6'b101001;
-    muxsel1 = 1;
-    #50;
-    muxsel1 = 0;
+    rt = 6'b000000;
+    #20;         
+
+    /*Store some values in the register file*/
+    we = 1'b1;
+    rd = 6'b000111;
+    wd = 32'h0000AAAA;
+    
+    #20
+    
+    rd = 6'b111000;
+    wd = 32'hBBBB0000;
+    
+    #20
+    wd = 32'h00000000;
+    we = 1'b0;
+    /* saple operation: add rs and rt*/
+    we = 1'b0;
+    ALUopsel = 4'b0000;  
+    rd = 6'b111111;
+    rs = 6'b000111;
+    rt = 6'b111000;
     
     #50;
-    rs = 6'b100011;
-    muxsel1 = 1;
-    #50;
-    muxsel1 = 0;
-    #50;
     
+    /*store some value */
     we = 1'b1;
     rd = 6'b111111;
-    wd = 32'hFFAAFFAA;
-    rs = 6'b000000;
-    rt = 6'b000000;
+    wd = 32'hEEEEEEEE;
+    
+    #30;
+    
+    /*subtract an immediate value*/
+    
+    we = 1'b0;
+    muxsel1 = 1;
+    ALUopsel = 4'b0011;
+    rd = 6'b110011;
+    rs = 6'b000111;
+    rt = 6'b111111; //This value should be ignored.
+    imm_in = 15'h0AA9; //ALU result should be a001
+    
+    #30;
+    
+    /*Test opb premux in an addition with immediate value */
+    
+    we = 1'b0;
+    ALUopsel = 4'b0000;
+    muxsel1 = 1;  
+    rd = 6'b111111;
+    rs = 6'b111000;
+    rt = 6'b000111; //Should be ignored.
     
 //    mux_sel = 1;
 //    #50;
