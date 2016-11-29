@@ -24,10 +24,8 @@ parameter RWIDTH = 6;
 parameter IMM_IN = 15;
 module controller(
     input logic [DWIDTH-1:0]in32,
-    output logic ri,
     output logic [RWIDTH-1:0]rs,
     output logic [RWIDTH-1:0]rd,
-    output logic [3:0]fx,
     output logic [RWIDTH-1:0]rt,
     output logic [IMM_IN -1:0]imm,
 	
@@ -39,10 +37,8 @@ module controller(
 	wire WE2	 /*MemWrite*/
     );
 
-    assign ri = in32[DWIDTH-1];
     assign rs = in32[30:25];
     assign rd = in32[24:19];
-    assign fx = in32[18:15];
     assign rt = (in32[DWIDTH-1]) ? 6'b000000 : in32[14:9] ;
     assign imm = (in32[DWIDTH-1]) ? in32[14:0] : in32[8:0] ;    
 	
