@@ -38,15 +38,25 @@ module DataMemory_TB;
         );
 
 initial begin
-      
-       Addr = 32'b11111111111111111111111111111111;
+
+       Addr = 32'b00000000000000000000000000110111; //should write in MEM[00000000000000000000000000110111] space and read when WE2 =1
        WriDat = 32'b00000000000000000110000000000000;
        WE2 = 1'b0;
        #10;
        WE2 = 1'b1;
        #10;
+
+       Addr = 32'b00000000000000000000000000000000; //should only read MEM[0] and not wirte
+       WriDat = 32'b00000000000000000110000000000001;
        WE2 = 1'b0;
-       #10
+       #10;
+       WE2 = 1'b1;
+       #10;
+       
+       Addr = 32'b11111111111111111111111111111111; // code should not work because address is too big for the memory
+       WriDat = 32'b00000000000000000110000000000001;
+       WE2 = 1'b0;
+       #10;
        WE2 = 1'b1;
        #10;
 
