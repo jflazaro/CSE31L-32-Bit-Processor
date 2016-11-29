@@ -118,53 +118,11 @@ initial begin
     rs = 6'b111000;
     rt = 6'b000111; //Should be ignored.
     
-//    mux_sel = 1;
-//    #50;
-//    mux_sel = 0;
+    #30;
+    /*no immediate value */
+    muxsel1 = 0;
     
-//    #50;
-    
-//    we = 1'b1;
-//    rd = 6'b001100;
-//    wd = 32'hAAAAAAAA;
-//    rs = 6'b001011;
-//    rt = 6'b111111;
-    
-//    mux_sel = 1;
-//    #50;
-//    mux_sel = 0;
-    
-//    #50;        
-//    we = 1'b0;
-//    rs = 6'b001100;
-//    rt= 6'b111111;
-//    rd = 6'b000000;
-//    wd = 32'h00000000;
-    
-//    #50;
-//    mux_sel = 1;
-    
-//    #50;
-//    ra1 = 6'b000000;
-//    ra2 = 6'b000111;
-    
-//    #50;
-//    we = 1'b1;
-//    wa = 6'b000000;
-//    wd = 32'hBBBBBBBB;
-//    ra2 = 6'b111111;
-    
-//    #50;
-//    we = 0'b0;
-//    ra1 = 6'b000000;
-    
-//    #4;
-//    ra1 = 6'b111111;
-//    #3;
-//    ra2 = 6'b001100;
-    
-//    #50;
-end
+    end
            
 always #10 clk = ~clk;
 endmodule
