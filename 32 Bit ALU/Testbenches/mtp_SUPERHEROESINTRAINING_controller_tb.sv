@@ -29,9 +29,13 @@ module controller_tb;
     logic [3:0]fx;
     logic [5:0]rt;
     logic [14:0]imm;
+    
+    /*flags*/
     logic [3:0] ALUopsel;
 	wire WE1;
 	wire WE2;
+	wire MUXsel1;
+	wire MUXsel2;
 	
     controller C1(
         .in32(a),
@@ -44,7 +48,9 @@ module controller_tb;
 		
 		.ALUopsel(ALUopsel),
 		.WE1(WE1),
-		.WE2(WE2)
+		.WE2(WE2),
+		.MUXsel1(MUXsel1),
+		.MUXsel2(MUXsel2)
         );
     
 initial begin
