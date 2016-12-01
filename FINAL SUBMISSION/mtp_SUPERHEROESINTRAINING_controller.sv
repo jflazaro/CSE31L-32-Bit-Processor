@@ -62,9 +62,9 @@ module controller(
 	                                    /*This is apparent in NOP, MOV, LOAD, STORE */
 	assign MUXsel1 = in32[D-1] ? 1 : 0; /*if immediate mode, then MUXsel1 = 1 */
     assign MUXsel2 = (in32[18:15]==4'b0100) ? 1 : /*if load or store function is called, muxsel2 = 1*/
-                     (in32[18:15]==4'b0110) ? 1 :
+                     (in32[18:15]==4'b0110) ? 0 : /*muxsel2 = 0 for store function to return address*/
                      0;
-    assign WE1 = (in32[18:15]==4'b0100) ? 1: 0; /*load function*/
-    assign WE2 = (in32[18:15]==4'b0110) ? 1: 0; /*store function */
+    assign WE1 = (in32[18:15]!=4'b1111 && in32[18:15]!=4'b0110) ? 1: 0; /*load function*/
+    assign WE2 = (in32[18:15]==4'b0110) ? 1: 0; /*store function. */
     
 endmodule

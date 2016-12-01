@@ -44,7 +44,6 @@ wire ControltoWriteEnable1;
 wire ControltoWriteEnable2;
 wire [DATA-1:0] RegtoOpBwd;
 wire [DATA-1:0] RegtoAddr;
-wire [DATA-1:0] RegtoWriteData;
 
 Instruction_Block_32bit InstrBlock(
     .inc(INC),
@@ -58,6 +57,7 @@ RegBlock RBlock(
     .rt(ControltoRA2), //[ADDR-1:0] wire
     .rd(ControltoWA), //[ADDR-1:0] wire
     .wd(reg_write_data), //[DATA-1:0] wire
+    //.wd(RegtoAddr),
     .we(ControltoWriteEnable1),
     .clk(clk),
     .muxsel1(ControltoMuxSel1),
@@ -65,14 +65,17 @@ RegBlock RBlock(
     .ALUopsel(ControltoALUopsel), //[ALUOPSEL-1:0] wire
     .opBwd(RegtoOpBwd), //[DATA-1:0] wire
     .ALUresult(RegtoAddr) //[DATA-1:0] wire
+    //.ALUresult(reg_write_data)
 );
 
 DM DataMem(
     .MS2(ControltoMuxSel2),
     .WE2(ControltoWriteEnable2),
     .Addr(RegtoAddr), //[DATA-1:0] wire
+    //.Addr(reg_write_data),
     .WriDat(RegtoOpBwd), //[DATA-1:0] wire
     .WD(reg_write_data) //[DATA-1:0] wire
+    //.WD(RegtoAddr)
 );
 
 controller Control(

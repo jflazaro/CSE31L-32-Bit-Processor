@@ -33,14 +33,14 @@ input logic [AWIDTH - 1:0] WriDat;
 
 logic [AWIDTH - 1:0] MEM [ALENGTH -1: 0];
 
-/*genvar i;
+genvar i;
 generate
     for (i=0;i<ALENGTH;i++) begin: gen_dm
         assign MEM[0] = 0;
     end
-endgenerate*/
+endgenerate
 
-assign MEM[0] = 0;
+//assign MEM[0] = 0;
 
 always_comb begin
     if (WE2 && Addr) begin
