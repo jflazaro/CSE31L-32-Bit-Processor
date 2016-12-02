@@ -46,6 +46,9 @@ always_comb begin
     if (WE2 && Addr) begin
         MEM[Addr] <= WriDat;
         ReaDat <= MEM[Addr];
-        end else ReaDat <= MEM[Addr];
+        end 
+        else begin 
+        ReaDat <= MEM[Addr];
+    end
 end 
 endmodule
